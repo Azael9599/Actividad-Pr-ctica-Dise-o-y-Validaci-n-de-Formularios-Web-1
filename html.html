@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - EduPlatform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <h1>Registro en EduPlatform</h1>
+            
+            <div class="progress-indicator">
+                <div class="progress-step active">Información Personal</div>
+                <div class="progress-step">Información Académica</div>
+                <div class="progress-step">Ubicación</div>
+            </div>
+            
+            <form id="registroForm" novalidate>
+                <!-- Paso 1: Información Personal -->
+                <fieldset id="paso1" class="form-step active">
+                    <legend>Información Personal</legend>
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input 
+                            type="text" 
+                            id="nombre" 
+                            name="nombre" 
+                            required 
+                            minlength="3" 
+                            pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"
+                            aria-describedby="nombre-error"
+                        >
+                        <div id="nombre-error" class="error-message" role="alert"></div>
+                        <small class="form-hint">Ingresa tu nombre y apellido</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de nacimiento</label>
+                        <input 
+                            type="date" 
+                            id="fechaNacimiento" 
+                            name="fechaNacimiento" 
+                            required
+                            aria-describedby="fechaNacimiento-error"
+                        >
+                        <div id="fechaNacimiento-error" class="error-message" role="alert"></div>
+                        <small class="form-hint">Debes tener al menos 13 años para registrarte</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            aria-describedby="email-error"
+                        >
+                        <div id="email-error" class="error-message" role="alert"></div>
+                        <small class="form-hint">Utilizarás este correo para iniciar sesión</small>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <div class="password-container">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    required 
+                                    minlength="8"
+                                    aria-describedby="password-requirements password-error"
+                                >
+                                <button type="button" class="toggle-password" aria-label="Mostrar contraseña">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                            <div id="password-error" class="error-message" role="alert"></div>
+                            <div id="password-requirements" class="requirements">
+                                <p>La contraseña debe contener:</p>
+                                <ul>
+                                    <li id="req-length">Al menos 8 caracteres</li>
+                                    <li id="req-uppercase">Al menos una mayúscula</li>
+                                    <li id="req-lowercase">Al menos una minúscula</li>
+                                    <li id="req-number">Al menos un número</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar contraseña</label>
+                            <div class="password-container">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    required
+                                    aria-describedby="confirmPassword-error"
+                                >
+                                <button type="button" class="toggle-password" aria-label="Mostrar contraseña">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                            <div id="confirmPassword-error" class="error-message" role="alert"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-next">Siguiente</button>
+                    </div>
+                </fieldset>
+                
+                <!-- Paso 2: Información Académica -->
+                <fieldset id="paso2" class="form-step">
+                    <legend>Información Académica</legend>
+                    
+                    <div class="form-group">
+                        <label for="tipoUsuario">Tipo de usuario</label>
+                        <select 
+                            id="tipoUsuario" 
+                            name="tipoUsuario" 
+                            required
+                            aria-describedby="tipoUsuario-error"
+                        >
+                            <option value="">Selecciona una opción</option>
+                            <option value="estudiante">Estudiante</option>
+                            <option value="profesor">Profesor</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                        <div id="tipoUsuario-error" class="error-message" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group" id="nivelEducativoContainer" style="display: none;">
+                        <label for="nivelEducativo">Nivel educativo</label>
+                        <select 
+                            id="nivelEducativo" 
+                            name="nivelEducativo"
+                            aria-describedby="nivelEducativo-error"
+                        >
+                            <option value="">Selecciona una opción</option>
+                            <option value="primaria">Primaria</option>
+                            <option value="secundaria">Secundaria</option>
+                            <option value="preparatoria">Preparatoria</option>
+                            <option value="universidad">Universidad</option>
+                            <option value="posgrado">Posgrado</option>
+                        </select>
+                        <div id="nivelEducativo-error" class="error-message" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group" id="especializacionContainer" style="display: none;">
+                        <label for="especializacion">Área de especialización</label>
+                        <select 
+                            id="especializacion" 
+                            name="especializacion" 
+                            multiple
+                            aria-describedby="especializacion-error especializacion-hint"
+                        >
+                            <option value="matematicas">Matemáticas</option>
+                            <option value="ciencias">Ciencias</option>
+                            <option value="lenguaje">Lenguaje y Literatura</option>
+                            <option value="sociales">Ciencias Sociales</option>
+                            <option value="artes">Artes</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="educacionFisica">Educación Física</option>
+                        </select>
+                        <div id="especializacion-error" class="error-message" role="alert"></div>
+                        <small id="especializacion-hint" class="form-hint">Mantén presionada la tecla Ctrl (o Cmd en Mac) para seleccionar múltiples áreas</small>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-prev">Anterior</button>
+                        <button type="button" class="btn-next">Siguiente</button>
+                    </div>
+                </fieldset>
+                
+                <!-- Paso 3: Ubicación -->
+                <fieldset id="paso3" class="form-step">
+                    <legend>Ubicación</legend>
+                    
+                    <div class="form-group">
+                        <label for="pais">País</label>
+                        <select 
+                            id="pais" 
+                            name="pais" 
+                            required
+                            aria-describedby="pais-error"
+                        >
+                            <option value="">Selecciona un país</option>
+                            <option value="AR">Argentina</option>
+                            <option value="BO">Bolivia</option>
+                            <option value="CL">Chile</option>
+                            <option value="CO">Colombia</option>
+                            <option value="CR">Costa Rica</option>
+                            <option value="CU">Cuba</option>
+                            <option value="DO">República Dominicana</option>
+                            <option value="EC">Ecuador</option>
+                            <option value="SV">El Salvador</option>
+                            <option value="GT">Guatemala</option>
+                            <option value="HN">Honduras</option>
+                            <option value="MX">México</option>
+                            <option value="NI">Nicaragua</option>
+                            <option value="PA">Panamá</option>
+                            <option value="PY">Paraguay</option>
+                            <option value="PE">Perú</option>
+                            <option value="PR">Puerto Rico</option>
+                            <option value="ES">España</option>
+                            <option value="UY">Uruguay</option>
+                            <option value="VE">Venezuela</option>
+                        </select>
+                        <div id="pais-error" class="error-message" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input 
+                            type="text" 
+                            id="ciudad" 
+                            name="ciudad" 
+                            required
+                            aria-describedby="ciudad-error"
+                        >
+                        <div id="ciudad-error" class="error-message" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input 
+                            type="checkbox" 
+                            id="terminos" 
+                            name="terminos" 
+                            required
+                            aria-describedby="terminos-error"
+                        >
+                        <label for="terminos">Acepto los <a href="#" class="terms-link">términos y condiciones</a></label>
+                        <div id="terminos-error" class="error-message" role="alert"></div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-prev">Anterior</button>
+                        <button type="submit" class="btn-submit">Registrarme</button>
+                    </div>
+                </fieldset>
+            </form>
+            
+            <div class="login-link">
+                <p>¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Modal de Éxito -->
+    <div id="successModal" class="modal" hidden>
+        <div class="modal-content">
+            <span class="success-icon">✓</span>
+            <h2>¡Registro Exitoso!</h2>
+            <p>Hemos enviado un correo de verificación a tu dirección.</p>
+            <p>Por favor, revisa tu bandeja de entrada para completar el proceso.</p>
+            <button type="button" class="btn-primary">Volver al inicio</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
